@@ -21,11 +21,11 @@ func TestUse(t *testing.T) {
 	b := makeTestBucket()
 	k := b.Get("meow")
 	r := b.use(k, 50)
-	if r.Remaining != 50 || r.Used != 50 {
+	if r.Remaining != 99950 || r.Used != 50 {
 		t.Logf("Wrong: %+v", r)
 		t.Fail()
 	}
-	if k.current != 50 {
+	if k.current != 99950 {
 		t.Logf("Didn't decriment bucket: %+v", k)
 		t.Fail()
 	}
