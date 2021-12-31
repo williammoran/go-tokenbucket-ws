@@ -54,6 +54,7 @@ func main() {
 			bucket, found := buckets[bucketName]
 			if !found {
 				w.WriteHeader(http.StatusNotFound)
+				return
 			}
 			use := bucket.Use(tokenName, amount)
 			w.Header().Set("Content-Type", "application/json")
