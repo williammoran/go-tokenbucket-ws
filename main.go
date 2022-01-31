@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/csv"
 	"encoding/json"
+	"flag"
 	"io"
 	"net/http"
 	"os"
@@ -12,7 +13,10 @@ import (
 )
 
 func main() {
-	f, err := os.Open("tokenbucket.conf")
+	confFile := flag.String("c", "tokenbucket.conf", "location of config file")
+	listen := flag.String("l", ":8080", "listen address")
+	flag.Parse()
+	f, err := os.Open(*confFile)
 	if err != nil {
 		panic(err.Error())
 	}
@@ -65,5 +69,5 @@ func main() {
 			w.Write(jsonResp)
 		},
 	)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(*listen, nil)
 }

@@ -26,8 +26,8 @@ what this service does.
 # Usage
 
 Once you have the program built, edit the config file and run the program.
-It will listen on port 8080. An example `wget` using the default example
-config could be:
+It will listen on port 8080 by default. An example `wget` using the default
+example config could be:
 
 ``wget -q -O - http://localhost:8080/example0/meow/5``
 
@@ -65,9 +65,18 @@ or anything else that is a string or can be converted to one)
 
 # Configuration
 
-On startup, the service reads its configuration from a ``tokenbucket.conf`` file
-in the same directory as the binary. The service will not start if it can not
-access this file.
+The program accepts two parameters on startup.
+
+``-l`` specifies the listen address and port, as would be appropriate to
+pass into ``http.ListenAndServe()``. For example, ``-l localhost:8080`` will
+cause the service to only respond to HTTP requests on 127.0.0.1 port 8080.
+
+Also, you can specify the location of the config file with
+the ``-c`` flag.
+
+On startup, the service reads its configuration file. (Which defaults to
+``tokenbucket.conf`` in the same directory as the binary) The service will
+not start if it can not access this file.
 
 This file is in CSV format, because I thought it would be funny to hear what
 kind of comments I got about that.
